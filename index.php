@@ -3,6 +3,8 @@
 ini_set('display_errors', '0');     
 require_once 'HTML/Table.php';
 
+
+// quick function for outputting barcode images
 function _str2barcodeBase64($str, $type = 'code128') {
 	include_once "Image/Barcode2.php";
 	
@@ -26,6 +28,7 @@ function _str2barcodeBase64($str, $type = 'code128') {
 	return '<img style="clear:left;" src="data:image/' . $imgtype . ';base64,' . $imgBase64 . '">';
 }
 
+// Data array
 
 $data = array();
 for ($x = 0; $x < 10; $x++) {
@@ -46,8 +49,14 @@ for ($x = 0; $x < 10; $x++) {
 			$str_in = "${x}${x}${x}${x}${x}${x}${x}";
 			$type_out = ($x % 2 == 0 ) ? 'code39' : 'code128';
 	}
+	
 	array_push($data, array(_str2barcodeBase64($str_in, $type_out), $type_out));
 }
+
+
+/*************************************************************************************************************************/
+/*************************************************************************************************************************/
+/*************************************************************************************************************************/
 
 // BUILD TABLE
 $attrs = array(
@@ -64,11 +73,14 @@ $table->setHeaderContents(0, 1, 'Image');
 $table->setHeaderContents(0, 2, 'Type');
 
 $rowAttrs = array(
-	'style' => 'font-size: 18px; font-family: Arial; color: #f00; font-weight: bold;'
+	'style' => 'font-size: 18px; font-family: Arial; color: #d00; font-weight: bold;'
 );
 $colAttrs = array();
 $table->setRowAttributes(0, $rowAttrs, true);
 $table->setColAttributes(0, $rowAttrs);
+
+
+// ADD DATA TO TABLE
 
 for ($row = 0; $row < count($data); $row++) {
 	$i = 0;
