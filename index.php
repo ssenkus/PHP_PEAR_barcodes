@@ -28,8 +28,8 @@ function _str2barcodeBase64($str, $type = 'code128') {
 
 
 $data = array();
-for ($x = 0; $x < 3; $x++) {
-	switch ($x) {
+for ($x = 0; $x < 10; $x++) {
+	switch ($x % 3) {
 		case 0:
 			$str_in = "${x}${x}${x}${x}${x}${x}${x}";
 			$type_out = 'code39';
